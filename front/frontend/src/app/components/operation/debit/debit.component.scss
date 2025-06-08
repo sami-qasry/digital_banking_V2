@@ -1,0 +1,173 @@
+.debit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  padding: var(--spacing-lg);
+  background: var(--surface-gray-50);
+
+  .debit-card {
+    width: 100%;
+    max-width: 500px;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    background: var(--surface-white);
+    border: 1px solid var(--border-light);
+
+    mat-card-header {
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-sm);        mat-icon {
+          font-size: 30px;
+          color: var(--color-accent-blue);
+        }
+      }      mat-card-subtitle {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: 1.4;
+      }
+    }
+
+    .debit-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+
+      .full-width {
+        width: 100%;
+      }
+
+      mat-form-field {
+        mat-icon[matSuffix] {
+          color: var(--text-secondary);
+        }
+
+        &:focus-within mat-icon[matSuffix] {
+          color: var(--surface-black);
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 60px;
+        }
+      }
+
+      input, textarea {
+        font-size: var(--font-size-base);
+        
+        &:disabled {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    .card-actions {
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      gap: var(--spacing-md);
+      border-top: 1px solid var(--border-light);
+
+      button {        min-width: 140px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        font-weight: var(--font-weight-medium);
+        
+        mat-icon {
+          margin-right: var(--spacing-sm);
+          font-size: 20px;
+
+          &[class*="refresh"] {
+            animation: spin 1s linear infinite;
+          }
+        }
+
+        &[mat-button] {
+          color: var(--text-secondary);
+          border: 1px solid var(--border-light);
+
+          &:hover {
+            background: var(--surface-gray-50);
+            border-color: var(--surface-black);
+          }
+        }
+
+        &[mat-raised-button] {
+          background: var(--surface-black);
+          color: var(--text-white);
+          border: 1px solid var(--surface-black);
+          box-shadow: var(--shadow-sm);
+
+          &:hover {
+            background: var(--surface-gray-800);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            transform: none;
+            box-shadow: none;
+            background: var(--surface-gray-400);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .debit-container {
+    padding: 16px;
+    
+    .debit-card {
+      padding: 24px;
+      max-width: none;
+      
+      mat-card-header {
+        margin-bottom: 24px;
+        
+        mat-card-title {
+          font-size: 22px;
+          
+          mat-icon {
+            font-size: 26px;
+          }
+        }
+      }
+      
+      .debit-form {
+        gap: 20px;
+      }
+      
+      .card-actions {
+        margin-top: 24px;
+        flex-direction: column;
+        
+        button {
+          width: 100%;
+          margin: 4px 0;
+          order: 2;
+          
+          &[mat-raised-button] {
+            order: 1;
+          }
+        }
+      }
+    }
+  }
+}

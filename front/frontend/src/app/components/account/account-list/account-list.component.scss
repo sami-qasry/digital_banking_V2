@@ -1,0 +1,523 @@
+// GitHub Light High Contrast Account List
+.account-list-container {
+  min-height: 100vh;
+  background: var(--color-canvas);
+  padding: var(--spacing-md);
+
+  .page-header {
+    background: var(--color-canvas-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1px 0 rgba(31, 35, 40, 0.04);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-border);
+
+    .header-content {
+      .page-title {
+        margin: 0;
+        color: var(--color-text-primary);
+        font-weight: var(--font-weight-medium);
+        font-size: 32px;
+      }
+
+      .page-subtitle {
+        margin: var(--spacing-xs) 0 0 0;
+        color: var(--color-text-muted);
+        font-size: 16px;
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: var(--spacing-md);
+
+      .refresh-btn {
+        color: var(--color-accent-dark);
+        border: 2px solid var(--color-accent-dark);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-weight: var(--font-weight-medium);
+        transition: all var(--transition-fast);
+
+        &:hover {
+          background-color: var(--color-accent-dark);
+          color: var(--color-canvas);
+        }
+
+        mat-icon {
+          margin-right: var(--spacing-xs);
+        }
+      }      .add-btn {
+        background: var(--color-accent-dark);
+        color: var(--color-canvas);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-weight: var(--font-weight-medium);
+        box-shadow: 0 1px 0 rgba(31, 35, 40, 0.04);
+        border: 2px solid var(--color-accent-dark);
+        transition: all var(--transition-fast);
+
+        &:hover {
+          background: var(--color-accent-dark-hover);
+          border-color: var(--color-accent-dark-hover);
+          box-shadow: 0 3px 8px rgba(31, 35, 40, 0.12);
+          transform: translateY(-1px);
+        }
+
+        mat-icon {
+          margin-right: var(--spacing-xs);
+        }
+      }
+    }
+  }
+  .filters-card {
+    background: var(--color-canvas-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1px 0 rgba(31, 35, 40, 0.04);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+
+    .filters-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-semibold);
+
+      mat-icon {
+        margin-right: var(--spacing-xs);
+        font-size: 20px;
+      }
+    }
+
+    .filters-content {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: flex-end;
+      flex-wrap: wrap;
+
+      .filter-group {
+        flex: 1;
+        min-width: 200px;
+
+        .mat-mdc-form-field {
+          width: 100%;
+
+          .mat-mdc-form-field-label {
+            color: var(--color-text-muted);
+            font-weight: var(--font-weight-medium);
+          }
+
+          &.mat-focused {
+            .mat-mdc-form-field-label {
+              color: var(--color-accent-dark);
+            }
+          }
+        }
+
+        .mat-mdc-select {
+          .mat-mdc-select-value {
+            color: var(--color-text-primary);
+          }
+
+          &.mat-focused {
+            .mat-mdc-select-arrow {
+              color: var(--color-accent-dark);
+            }
+          }
+        }
+      }
+
+      .clear-filters-btn {
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        margin-bottom: 16px;
+        transition: all var(--transition-fast);
+
+        &:hover {
+          border-color: var(--color-accent-dark);
+          color: var(--color-text-primary);
+        }
+      }
+    }
+  }
+
+  .accounts-card {
+    background: var(--surface-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);    padding: 0;
+    overflow: hidden;
+
+    .card-header {
+      background: var(--surface-black);
+      color: var(--text-white);
+      padding: var(--spacing-md) var(--spacing-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .header-info {
+        .card-title {
+          margin: 0;
+          font-weight: 500;
+          font-size: 24px;
+        }
+
+        .results-count {
+          margin: var(--spacing-xs) 0 0 0;
+          opacity: 0.9;
+          font-size: 14px;
+        }
+      }
+
+      .loading-indicator {
+        color: var(--text-white);
+      }
+    }
+
+    .card-content {
+      padding: 0;
+
+      .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px var(--spacing-md);
+        color: var(--text-primary);
+
+        .loading-text {
+          margin-left: var(--spacing-md);
+          font-size: 16px;
+        }
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 60px var(--spacing-md);
+        color: var(--text-secondary);
+
+        mat-icon {
+          font-size: 64px;
+          width: 64px;
+          height: 64px;
+          margin-bottom: var(--spacing-md);
+          opacity: 0.5;
+        }
+
+        h3 {
+          margin: var(--spacing-sm) 0;
+          font-weight: 500;
+          color: var(--text-primary);
+        }
+
+        p {
+          opacity: 0.8;
+          margin-bottom: var(--spacing-md);
+        }
+
+        .add-first-btn {
+          background: var(--surface-black);
+          color: var(--text-white);
+          border-radius: var(--radius-full);
+          padding: var(--spacing-sm) var(--spacing-lg);
+          font-weight: 500;
+          transition: var(--transition-smooth);
+
+          &:hover {
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+          }
+
+          mat-icon {
+            margin-right: var(--spacing-xs);
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+
+      .accounts-table {
+        width: 100%;
+        background: transparent;
+
+        .mat-mdc-header-row {
+          background: var(--surface-light);
+
+          .mat-mdc-header-cell {
+            color: var(--text-primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-medium);
+            padding: 16px 12px;
+          }        }
+
+        .mat-mdc-row {
+          transition: var(--transition-smooth);
+
+          &:hover {
+            background-color: var(--surface-light);
+          }
+
+          .mat-mdc-cell {
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--border-light);
+
+            &.account-id-cell {
+              font-family: 'Courier New', monospace;
+              font-size: 14px;
+              color: var(--text-secondary);
+            }
+
+            &.customer-cell {
+              .customer-info {
+                .customer-name {
+                  font-weight: 500;
+                  color: var(--text-primary);
+                  margin-bottom: 2px;
+                }
+
+                .customer-email {
+                  font-size: 12px;
+                  color: var(--text-secondary);
+                }
+              }
+            }
+
+            &.balance-cell {
+              .balance-amount {
+                font-weight: 600;
+                font-family: 'Courier New', monospace;
+                font-size: 16px;
+
+                &.positive {
+                  color: var(--status-success);
+                }
+
+                &.negative {
+                  color: var(--status-error);
+                }
+
+                &.zero {
+                  color: var(--text-secondary);
+                }
+              }
+            }
+
+            &.actions-cell {
+              .action-buttons {
+                display: flex;
+                gap: var(--spacing-xs);
+
+                .mat-mdc-icon-button {
+                  color: var(--text-secondary);
+                  transition: var(--transition-smooth);
+
+                  &:hover {
+                    background-color: var(--surface-light);
+                    transform: scale(1.1);
+                    color: var(--text-primary);
+                  }
+
+                  &.edit-btn:hover {
+                    color: var(--surface-black);
+                  }
+
+                  &.delete-btn:hover {
+                    color: var(--status-error);
+                  }
+                }
+              }
+            }
+
+            .account-type-chip {
+              border-radius: var(--radius-full);
+              font-size: 12px;
+              font-weight: 500;
+              padding: 4px 12px;
+              border: 1px solid var(--border-medium);
+
+              &.current {
+                background: var(--surface-black);
+                color: var(--text-white);
+                border-color: var(--surface-black);
+              }
+
+              &.saving {
+                background: var(--surface-light);
+                color: var(--text-primary);
+                border-color: var(--border-medium);              }
+            }
+
+            .status-chip {
+              border-radius: var(--radius-full);
+              font-size: 12px;
+              font-weight: 500;
+              padding: 4px 12px;
+
+              &.active {
+                background: var(--surface-light);
+                color: var(--status-success);
+                border: 1px solid var(--status-success);
+              }
+
+              &.inactive {
+                background: var(--surface-light);
+                color: var(--status-error);
+                border: 1px solid var(--status-error);
+              }
+
+              &.suspended {
+                background: var(--surface-light);
+                color: var(--status-warning);
+                border: 1px solid var(--status-warning);
+              }
+            }
+          }
+        }
+      }
+
+      .table-pagination {
+        padding: var(--spacing-md);
+        border-top: 1px solid var(--border-light);
+        background: var(--surface-light);
+
+        ::ng-deep .mat-mdc-paginator {
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .account-list-container {
+    padding: var(--spacing-sm);
+
+    .page-header {
+      flex-direction: column;
+      gap: var(--spacing-md);
+      text-align: center;
+
+      .header-content {
+        .page-title {
+          font-size: 28px;
+        }
+      }
+
+      .header-actions {
+        justify-content: center;
+        width: 100%;
+
+        .mat-mdc-button {
+          flex: 1;
+          max-width: 200px;
+        }
+      }
+    }
+
+    .filters-card {
+      .filters-content {
+        flex-direction: column;
+
+        .filter-group {
+          min-width: 100%;
+        }
+
+        .clear-filters-btn {
+          align-self: center;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .accounts-card {
+      .card-content {
+        .accounts-table {
+          font-size: 14px;
+
+          .mat-mdc-header-cell,
+          .mat-mdc-cell {
+            padding: 12px var(--spacing-xs);
+          }
+
+          .actions-cell {            .action-buttons {
+              flex-direction: column;
+              gap: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .account-list-container {
+    .page-header {
+      .header-content {
+        .page-title {
+          font-size: 24px;
+        }
+      }
+
+      .header-actions {
+        flex-direction: column;
+        width: 100%;
+
+        .mat-mdc-button {
+          max-width: 100%;
+        }
+      }
+    }
+
+    .accounts-card {
+      .card-content {
+        .accounts-table {
+          // Hide less important columns on very small screens
+          .customer-cell,
+          .status-cell {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation
+.accounts-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Loading animation
+mat-spinner {
+  ::ng-deep circle {
+    stroke: var(--surface-black);
+  }
+}
+
+// Hover effects
+.mat-mdc-row:hover {
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+  position: relative;
+}
